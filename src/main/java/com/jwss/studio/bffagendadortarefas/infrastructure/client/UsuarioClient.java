@@ -18,39 +18,42 @@ public interface UsuarioClient {
 
     @GetMapping
     UsuarioDTOResponse buscaUsuarioPorEmail(@RequestParam("email") String email,
-                                            @RequestHeader(name="Authorization",required=false) String token);
+                                            @RequestHeader(name = "Authorization", required = false) String token);
 
 
     @PostMapping
     UsuarioDTOResponse salvaUsuario(@RequestBody UsuarioDTORequest usuarioDTO);
 
     @PostMapping("/login")
-  String login(@RequestBody LoginDTORequest usuarioDTO);
+    String login(@RequestBody LoginDTORequest usuarioDTO);
 
 
     @DeleteMapping("/{email}")
-     Void deletaUsuarioPorEmail(@PathVariable String email,
-                           @RequestHeader(name="Authorization",required=false) String token);
+    Void deletaUsuarioPorEmail(@PathVariable String email,
+                               @RequestHeader(name = "Authorization", required = false) String token);
 
 
     @PutMapping
     UsuarioDTOResponse atualizaDadosUsuario(@RequestBody UsuarioDTORequest dto,
-                                            @RequestHeader(name="Authorization",required=false) String token);
+                                            @RequestHeader(name = "Authorization", required = false) String token);
 
 
     @PutMapping("/endereco")
-    EnderecoDTOResponse atualizaEndereco (@RequestBody EnderecoDTORequest dto,
-                                          @RequestParam("id") Long id,
-                                          @RequestHeader(name="Authorization",required=false) String token);
+    EnderecoDTOResponse atualizaEndereco(@RequestBody EnderecoDTORequest dto,
+                                         @RequestParam("id") Long id,
+                                         @RequestHeader(name = "Authorization", required = false) String token);
+
     @PutMapping("/telefone")
-    TelefoneDTOResponse atualizaTelefone (@RequestBody TelefoneDTORequest dto,
-                                          @RequestParam("id") Long id,
-                                          @RequestHeader(name="Authorization",required=false) String token);
+    TelefoneDTOResponse atualizaTelefone(@RequestBody TelefoneDTORequest dto,
+                                         @RequestParam("id") Long id,
+                                         @RequestHeader(name = "Authorization", required = false) String token);
+
     @PostMapping("/endereco")
-    EnderecoDTOResponse cadastraEndereco (@RequestBody EnderecoDTORequest dto,
-                                          @RequestHeader(name="Authorization",required=false) String token);
+    EnderecoDTOResponse cadastraEndereco(@RequestBody EnderecoDTORequest dto,
+                                         @RequestHeader(name = "Authorization", required = false) String token);
+
     @PostMapping("/telefone")
-    TelefoneDTOResponse cadastraTelefone (@RequestBody TelefoneDTORequest dto,
-                                          @RequestHeader(name="Authorization",required=false) String token);
+    TelefoneDTOResponse cadastraTelefone(@RequestBody TelefoneDTORequest dto,
+                                         @RequestHeader(name = "Authorization", required = false) String token);
 
 }

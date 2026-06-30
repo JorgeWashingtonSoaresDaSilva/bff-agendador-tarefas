@@ -19,7 +19,7 @@ import java.util.List;
 public class CronService {
 
     private final TarefasService tarefasService;
-    private final  NotificacaoService notificacaoService;
+    private final NotificacaoService notificacaoService;
     private final UsuarioService usuarioService;
 
     @Value("${usuario.email}")
@@ -27,15 +27,16 @@ public class CronService {
 
     @Value("${usuario.senha}")
     private String senha;
-    @Scheduled(cron="${cron.horario}")
-    public void buscaTarefasProximaHora(){
+
+    @Scheduled(cron = "${cron.horario}")
+    public void buscaTarefasProximaHora() {
         String token = login(converterParaRequestDTO());
         log.info("iniciada a busca de terefas");
         LocalDateTime horaFutura = LocalDateTime.now().plusHours(1);
         LocalDateTime horaFuturaMaisCinco = LocalDateTime.now().plusHours(1).plusMinutes(5);
 
-        List<TarefasDTOResponse>listaTarefas= tarefasService.buscaTarefasAgendadasPorPeriodo(horaFutura,horaFuturaMaisCinco,token);
-        log.info("Tarefas encontradas "+ listaTarefas);
+        List<TarefasDTOResponse> listaTarefas = tarefasService.buscaTarefasAgendadasPorPeriodo(horaFutura, horaFuturaMaisCinco, token);
+        log.info("Tarefas encontradas " + listaTarefas);
         listaTarefas.forEach(tarefa -> {
             notificacaoService.enviaEmail(tarefa);
             log.info("Email enviando para usuario " + tarefa.getEmailUsuario());
@@ -44,12 +45,12 @@ public class CronService {
         log.info("Finalizado a busca e notificação de tarefas");
     }
 
-    public String login(LoginDTORequest dto){
+    public String login(LoginDTORequest dto) {
 
         return usuarioService.loginUsuario(dto);
     }
 
-    public LoginDTORequest converterParaRequestDTO(){
+    public LoginDTORequest converterParaRequestDTO() {
         return LoginDTORequest.builder()
                 .email(email)
                 .senha(senha)

@@ -1,8 +1,6 @@
 package com.jwss.studio.bffagendadortarefas.buisness.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-import com.jwss.studio.bffagendadortarefas.infrastructure.enums.StatusNotificacaoEnum;
 import lombok.*;
 
 import java.time.LocalDateTime;
